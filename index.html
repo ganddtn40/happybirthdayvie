@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hiiiii Vieee ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('bg.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Soft overlay biar card tetap jelas */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(4px);
+    z-index: 0;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.view {
+    display: none;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.view.active {
+    display: block;
+    animation: fadeInScale 0.35s ease forwards;
+}
+
+@keyframes fadeInScale {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px 30px;
+    box-shadow: 0 8px 32px rgba(111,168,220,0.25);
+    border: 3px dotted #6FA8DC;
+    text-align: center;
+}
+
+/* Welcome Image */
+.snoopy-img {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 20px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid #6FA8DC;
+}
+
+.snoopy-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Typography */
+.main-title {
+    font-size: 30px;
+    font-family: 'Caveat', cursive;
+    color: #6FA8DC;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 28px;
+    font-weight: 500;
+}
+
+/* Buttons */
+.btn {
+    padding: 14px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: #6FA8DC;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #5a92c7;
+}
+
+.btn-danger {
+    background: #ff6b6b;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #e05555;
+}
+
+.btn-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Envelope */
+.envelope-img {
+    max-width: 260px;
+    margin: 0 auto 24px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.envelope-img img {
+    width: 100%;
+    display: block;
+}
+
+/* Love Letter */
+.couple-photo {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 24px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 3px solid #6FA8DC;
+}
+
+.couple-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.emoticon {
+    font-size: 24px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.letter-text {
+    line-height: 1.8;
+    color: #444;
+    font-size: 15px;
+    margin-bottom: 28px;
+    font-weight: 500;
+}
+
+.btn-small {
+    padding: 10px 28px;
+    font-size: 14px;
+}
+
+/* Sad View */
+.sad-snoopy {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 24px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid #6FA8DC;
+}
+
+.sad-snoopy img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sad-text {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 24px;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .card {
+        padding: 32px 24px;
+    }
+    .main-title {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+
+<audio id="bgMusic" src="musik.mp3" loop></audio>
+<body>
+
+<div class="container">
+
+<!-- View 1 -->
+<div id="view-welcome" class="view active">
+    <div class="card">
+        <div class="snoopy-img">
+            <img src="yay.jpg" alt="">
+        </div>
+        <h1 class="main-title">Hiiiii Vieenescaa (∞_∞)</h1>
+        <p class="subtitle">Click the next button!! (づ｡◕‿‿◕｡)づ ♥</p>
+        <button class="btn btn-primary" onclick="showView('envelope')">Next!!</button>
+    </div>
+</div>
+
+<!-- View 2 -->
+<div id="view-envelope" class="view">
+    <div class="card">
+        <div class="envelope-img">
+            <img src="hbd.png" alt="">
+        </div>
+        <p class="subtitle">Do you want to open it? (≧◡≦) ♡</p>
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="showView('letter')">Open</button>
+            <button class="btn btn-danger" onclick="showView('sad')">No ty</button>
+        </div>
+    </div>
+</div>
+
+<!-- View 3 -->
+<div id="view-letter" class="view">
+    <div class="card">
+        <div class="couple-photo">
+            <img src="1.jpg" alt="">
+        </div>
+        <span class="emoticon">(ᵔ◡ᵔ)</span>
+        <div class="letter-text">
+            Happy Birthday, Vieenescaa. Semoga di umur yang baru ini kamu selalu dikelilingi hal-hal baik, langkahmu makin lancar mengejar semua mimpi, dan senyummu tidak pernah pudar walaupun dunia sedang tidak mudah. Terima kasih sudah jadi bestie yang selalu ada untuk mendengarkan cerita random, memberi dukungan tanpa ribet, dan membuat hari-hari terasa lebih seru dan berwarna. Semoga kebahagiaan, kesehatan, dan kesuksesan selalu mengikuti kamu ke mana pun kamu pergi, karena kamu benar-benar pantas mendapatkan yang terbaik.
+        </div>
+        <button class="btn btn-primary btn-small" onclick="showView('welcome')">♡ Back</button>
+    </div>
+</div>
+
+<!-- View 4 -->
+<div id="view-sad" class="view">
+    <div class="card">
+        <div class="sad-snoopy">
+            <img src="sad.jpg" alt="">
+        </div>
+        <p class="sad-text">Awh.. Let's try again. Please? &lt; &gt;</p>
+        <button class="btn btn-primary" onclick="showView('welcome')">Again..?</button>
+    </div>
+</div>
+
+</div>
+
+<script>
+let currentView = 'welcome';
+let musicStarted = false;
+
+function showView(viewName) {
+    const currentElement = document.getElementById(`view-${currentView}`);
+    const nextElement = document.getElementById(`view-${viewName}`);
+
+    // Auto play music saat pertama klik Next
+    if (viewName === 'envelope' && !musicStarted) {
+        const music = document.getElementById('bgMusic');
+        music.play();
+        musicStarted = true;
+    }
+
+    currentElement.style.opacity = '0';
+    currentElement.style.transform = 'scale(0.95)';
+
+    setTimeout(() => {
+        currentElement.classList.remove('active');
+        currentView = viewName;
+        nextElement.classList.add('active');
+    }, 300);
+}
+</script>
+
+
+</body>
+</html>
