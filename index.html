@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
 <title>Hiiiii Vieee ♡</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,17 +17,17 @@
 
 body {
     font-family: 'Quicksand', sans-serif;
-    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
     background: url('bg.jpg') no-repeat center center;
     background-size: cover;
     position: relative;
-    overflow: hidden;
+    padding: 20px;
 }
 
-/* Soft overlay biar card tetap jelas */
+/* Soft overlay */
 body::before {
     content: "";
     position: fixed;
@@ -41,14 +42,13 @@ body::before {
     z-index: 1;
     width: 100%;
     max-width: 500px;
-    padding: 20px;
 }
 
+/* View animation */
 .view {
     display: none;
     opacity: 0;
     transform: scale(0.95);
-    transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 .view.active {
@@ -72,17 +72,46 @@ body::before {
     text-align: center;
 }
 
-/* Welcome Image */
-.snoopy-img {
-    width: 110px;
-    height: 110px;
+/* Images */
+.snoopy-img,
+.sad-snoopy {
+    width: 120px;
+    height: 120px;
     margin: 0 auto 20px;
     border-radius: 16px;
     overflow: hidden;
     border: 2px solid #6FA8DC;
 }
 
-.snoopy-img img {
+.snoopy-img img,
+.sad-snoopy img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.envelope-img {
+    max-width: 260px;
+    margin: 0 auto 24px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.envelope-img img {
+    width: 100%;
+    display: block;
+}
+
+.couple-photo {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 24px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 3px solid #6FA8DC;
+}
+
+.couple-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -101,6 +130,21 @@ body::before {
     color: #666;
     margin-bottom: 28px;
     font-weight: 500;
+}
+
+.letter-text {
+    line-height: 1.8;
+    color: #444;
+    font-size: 15px;
+    margin-bottom: 28px;
+    font-weight: 500;
+}
+
+.sad-text {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 24px;
+    font-weight: 600;
 }
 
 /* Buttons */
@@ -144,91 +188,35 @@ body::before {
     flex-wrap: wrap;
 }
 
-/* Envelope */
-.envelope-img {
-    max-width: 260px;
-    margin: 0 auto 24px;
-    border-radius: 16px;
-    overflow: hidden;
-}
-
-.envelope-img img {
-    width: 100%;
-    display: block;
-}
-
-/* Love Letter */
-.couple-photo {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 24px;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 3px solid #6FA8DC;
-}
-
-.couple-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.emoticon {
-    font-size: 24px;
-    margin-bottom: 16px;
-    display: block;
-}
-
-.letter-text {
-    line-height: 1.8;
-    color: #444;
-    font-size: 15px;
-    margin-bottom: 28px;
-    font-weight: 500;
-}
-
 .btn-small {
     padding: 10px 28px;
     font-size: 14px;
 }
 
-/* Sad View */
-.sad-snoopy {
-    width: 140px;
-    height: 140px;
-    margin: 0 auto 24px;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 2px solid #6FA8DC;
-}
-
-.sad-snoopy img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.sad-text {
-    font-size: 20px;
-    color: #666;
-    margin-bottom: 24px;
-    font-weight: 600;
-}
-
 /* Responsive */
 @media (max-width: 480px) {
     .card {
-        padding: 32px 24px;
+        padding: 30px 22px;
     }
     .main-title {
         font-size: 24px;
     }
 }
+
+/* Kalau layar pendek, kasih ruang scroll */
+@media (max-height: 700px) {
+    body {
+        align-items: flex-start;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+}
 </style>
 </head>
 
-<audio id="bgMusic" src="musik.mp3" loop></audio>
 <body>
+
+<audio id="bgMusic" src="musik.mp3" loop></audio>
 
 <div class="container">
 
@@ -293,24 +281,19 @@ function showView(viewName) {
     const currentElement = document.getElementById(`view-${currentView}`);
     const nextElement = document.getElementById(`view-${viewName}`);
 
-    // Auto play music saat pertama klik Next
     if (viewName === 'envelope' && !musicStarted) {
         const music = document.getElementById('bgMusic');
-        music.play();
+        music.play().catch(() => {});
         musicStarted = true;
     }
 
-    currentElement.style.opacity = '0';
-    currentElement.style.transform = 'scale(0.95)';
+    currentElement.classList.remove('active');
+    currentView = viewName;
+    nextElement.classList.add('active');
 
-    setTimeout(() => {
-        currentElement.classList.remove('active');
-        currentView = viewName;
-        nextElement.classList.add('active');
-    }, 300);
+    window.scrollTo(0, 0);
 }
 </script>
-
 
 </body>
 </html>
